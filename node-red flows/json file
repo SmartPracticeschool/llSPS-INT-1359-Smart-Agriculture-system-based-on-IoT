@@ -1,0 +1,378 @@
+[
+    {
+        "id": "6212b6bc.14d0d8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "265b8c52.b21dd4",
+        "type": "ibmiot in",
+        "z": "6212b6bc.14d0d8",
+        "authentication": "apiKey",
+        "apiKey": "d8a82776.f0cc78",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "smartagri",
+        "applicationId": "",
+        "deviceType": "iotdevice",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": "",
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "dfb9c340.51065",
+                "33a8a6be.9d4c0a",
+                "8e76abec.37cf28"
+            ]
+        ]
+    },
+    {
+        "id": "cb55a2c6.d1d79",
+        "type": "debug",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 790,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "dfb9c340.51065",
+        "type": "function",
+        "z": "6212b6bc.14d0d8",
+        "name": "humidity",
+        "func": "msg.payload=msg.payload.d.humidity\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "d3bb2ec7.f9381",
+                "cb55a2c6.d1d79"
+            ]
+        ]
+    },
+    {
+        "id": "33a8a6be.9d4c0a",
+        "type": "function",
+        "z": "6212b6bc.14d0d8",
+        "name": "soiltemp",
+        "func": "msg.payload=msg.payload.d.objectTemp\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 160,
+        "wires": [
+            [
+                "59c820e6.cacd",
+                "cb55a2c6.d1d79"
+            ]
+        ]
+    },
+    {
+        "id": "7d572f6f.3f7f4",
+        "type": "ibmiot out",
+        "z": "6212b6bc.14d0d8",
+        "authentication": "apiKey",
+        "apiKey": "d8a82776.f0cc78",
+        "outputType": "cmd",
+        "deviceId": "motor",
+        "deviceType": "iotdevice1",
+        "eventCommandType": "command",
+        "format": "json",
+        "data": "data",
+        "qos": 0,
+        "name": "IBM IoT",
+        "service": "registered",
+        "x": 380,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "8e76abec.37cf28",
+        "type": "function",
+        "z": "6212b6bc.14d0d8",
+        "name": "temperature",
+        "func": "msg.payload=msg.payload.d.temperature\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 40,
+        "wires": [
+            [
+                "6ec7d3fe.7879fc",
+                "cb55a2c6.d1d79"
+            ]
+        ]
+    },
+    {
+        "id": "6ec7d3fe.7879fc",
+        "type": "ui_gauge",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "group": "ed713ec0.cffdd",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 810,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d3bb2ec7.f9381",
+        "type": "ui_gauge",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "group": "ed713ec0.cffdd",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 820,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "59c820e6.cacd",
+        "type": "ui_gauge",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "group": "ed713ec0.cffdd",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Soil Temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 790,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "946b2771.7a0748",
+        "type": "ui_button",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "group": "1be15720.379339",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "MOTOR ON",
+        "tooltip": "",
+        "color": "red",
+        "bgcolor": "white",
+        "icon": "",
+        "payload": "{\"command\":\"Motor On\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 170,
+        "y": 320,
+        "wires": [
+            [
+                "7d572f6f.3f7f4",
+                "893e5ae9.239418",
+                "ae56416b.02b63"
+            ]
+        ]
+    },
+    {
+        "id": "4d37ce5c.e469e",
+        "type": "ui_button",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "group": "1be15720.379339",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "MOTOR OFF",
+        "tooltip": "",
+        "color": "green",
+        "bgcolor": "white",
+        "icon": "",
+        "payload": "{\"command\":\"Motor Off\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 180,
+        "y": 420,
+        "wires": [
+            [
+                "7d572f6f.3f7f4",
+                "637bfe41.fae2c",
+                "ae56416b.02b63"
+            ]
+        ]
+    },
+    {
+        "id": "893e5ae9.239418",
+        "type": "debug",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Motor On\"",
+        "targetType": "jsonata",
+        "x": 680,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "637bfe41.fae2c",
+        "type": "debug",
+        "z": "6212b6bc.14d0d8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Motor Off\"",
+        "targetType": "jsonata",
+        "x": 680,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "453e31e3.e64c5",
+        "type": "ui_text",
+        "z": "6212b6bc.14d0d8",
+        "group": "1be15720.379339",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "",
+        "label": "MOTOR STATUS",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 910,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ae56416b.02b63",
+        "type": "change",
+        "z": "6212b6bc.14d0d8",
+        "name": "motor status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(payload.command)\t\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 360,
+        "wires": [
+            [
+                "453e31e3.e64c5"
+            ]
+        ]
+    },
+    {
+        "id": "d8a82776.f0cc78",
+        "type": "ibmiot",
+        "z": "",
+        "name": "",
+        "keepalive": "60",
+        "serverName": "",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    },
+    {
+        "id": "ed713ec0.cffdd",
+        "type": "ui_group",
+        "z": "",
+        "name": "Watson IoT Sensor Simulator Data",
+        "tab": "b10e90f1.0a271",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "1be15720.379339",
+        "type": "ui_group",
+        "z": "",
+        "name": "Motor Control",
+        "tab": "b10e90f1.0a271",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "b10e90f1.0a271",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Smart Agriculture System based on IoT",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
